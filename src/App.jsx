@@ -1,8 +1,8 @@
 import { useState } from 'react'
-
 import './App.css'
 
 function App() {
+
 
   const [products] = useState([
     {
@@ -16,25 +16,23 @@ function App() {
       img: 'https://m.media-amazon.com/images/I/81-x+F2EsHL.jpg',
     },
   ])
-  
   const [cart, setCart] = useState([])
+  const [page, setPage] = useState('products')
+
 
   const add = (e) => {
     setCart([...cart, {...e}])
   }
-
   const remove = (e) => {
     setCart(cart.filter(i => i !== e))
   }
-
   const total = () => {
     return Math.ceil(cart.reduce((total, i) => total + i.price, 0)*100)/100
   }
 
-  return (
-    <div>
+  const showProducts = () => (
+    <>
       <h1>Products</h1>
-      <button>cart ({cart.length})</button>
       <div className="grid">
         {products.map((i, idx) => (
           <div key={idx}>
@@ -45,7 +43,11 @@ function App() {
           </div>
         ))}
       </div>
+    </>
+  )
 
+  const showCart = () => (
+    <>
       <h1>Cart</h1>
       <div>Total: {total()}</div>
       <div className="grid">
@@ -58,7 +60,16 @@ function App() {
           </div>
         ))}
       </div>
-    </div>
+    </>
+  )
+    
+  return (
+    <>
+      <button onClick={() => setPage('products')}>products</button>
+      <button onClick={() => setPage('cart')}>cart ({cart.length})</button>
+      {page === 'products' && showProducts()}
+      {page === 'cart' && showCart()}
+    </>
   )
 }
 
