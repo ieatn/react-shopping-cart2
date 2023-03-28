@@ -7,8 +7,23 @@ function App() {
 
   const [cart, setCart] = useState([])
 
+  const cartLength = () => {
+    return cart.reduce((total, i) => total + i.quantity, 0)
+  }
+
   const add = (e) => {
-    setCart([...cart, {...e}])
+    let newCart = [...cart]
+    let inCart = cart.find(i => i.name === e.name)
+    if (inCart) {
+      inCart.quantity++
+      console.log('here')
+    } else {
+      e = {
+        ...e, quantity: 1
+      }
+      newCart.push(e)
+    }
+    setCart(newCart)
   }
 
   const [page, setPage] = useState('products')
@@ -16,7 +31,7 @@ function App() {
   return (
     <>
       <button onClick={() => setPage('products')}>products</button>
-      <button onClick={() => setPage('cart')}>cart ({cart.length})</button>
+      <button onClick={() => setPage('cart')}>cart ({cartLength()})</button>
       {page === 'products' && <Products add={add}/>}
       {page === 'cart' && <Cart cart={cart} setCart={setCart} />}
     </>
