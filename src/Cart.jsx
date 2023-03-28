@@ -1,10 +1,8 @@
 import { useContext } from "react"
 import { CartContext } from './context/CartContext'
 
-
-export default function Cart({cart, setCart}) {
-    
-    const {number, setNumber} = useContext(CartContext)
+export default function Cart() {
+    const {cart, setCart} = useContext(CartContext)
 
     const remove = (e) => {
         setCart(cart.filter(i => i !== e))
@@ -25,7 +23,6 @@ export default function Cart({cart, setCart}) {
 
     return (
         <>
-            <div>context number is: {number}</div>
             <h1>Cart</h1>
             <div>Total: {total()}</div>
             {cart.length > 0 && (

@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from './context/CartContext'
 
-export default function Products({add}) {
+export default function Products() {
+
+    const {add} = useContext(CartContext)
+
     const [products] = useState([
         {
             name: 'battery',
