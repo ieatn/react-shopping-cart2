@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Cart from './Cart'
 import Products from './Products'
 
-function App() {
+const cartLS = JSON.parse(localStorage.getItem('cart') || '[]')
 
-  const [cart, setCart] = useState([])
+function App() {
+  
+  const [cart, setCart] = useState(cartLS)
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   const cartLength = () => {
     return cart.reduce((total, i) => total + i.quantity, 0)
