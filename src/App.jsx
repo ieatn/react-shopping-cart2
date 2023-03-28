@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Cart from './Cart'
+import { CartContext } from './context/CartContext'
 import Products from './Products'
 
 const cartLS = JSON.parse(localStorage.getItem('cart') || '[]')
 
 function App() {
   
+  const {number, setNumber} = useContext(CartContext)
+
   const [cart, setCart] = useState(cartLS)
 
   useEffect(() => {
@@ -36,6 +39,10 @@ function App() {
 
   return (
     <>
+      <div>
+        <p>context: {number}</p>
+        <button onClick={() => setNumber(number + 1)}>+</button>
+      </div>
       <button onClick={() => setPage('products')}>products</button>
       <button onClick={() => setPage('cart')}>cart ({cartLength()})</button>
       {page === 'products' && <Products add={add}/>}
