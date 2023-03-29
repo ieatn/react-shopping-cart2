@@ -1,8 +1,9 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { CartContext } from './context/CartContext'
 
 export default function Cart() {
     const {cart, setCart} = useContext(CartContext)
+
 
     const remove = (e) => {
         setCart(cart.filter(i => i !== e))
@@ -23,22 +24,22 @@ export default function Cart() {
 
     return (
         <>
-            <h1>Cart</h1>
-            <div>Total: {total()}</div>
-            {cart.length > 0 && (
-                <button onClick={() => clear()}>clear</button>
-            )}
-            <div className="grid">
-                {cart.map((i, idx) => (
-                    <div key={idx}>
-                        <p>{i.name}</p>
-                        <p>{i.price}</p>
-                        <input onChange={(e) => setQuantity(i, parseInt(e.target.value))} value={i.quantity} />
-                        <img src={i.img} alt="" />
-                        <button onClick={() => remove(i)}>remove</button>
-                    </div>
-                ))}
-            </div>
+        {cart.length > 0 && (
+            <button onClick={() => clear()}>clear</button>
+        )}
+        <div className="grid">
+            {cart.map((i, idx) => (
+                <div key={idx}>
+                    <p>{i.name}</p>
+                    <p>{i.price}</p>
+                    <input onChange={(e) => setQuantity(i, parseInt(e.target.value))} value={i.quantity} />
+                    <img src={i.img} alt="" />
+                    <button onClick={() => remove(i)}>remove</button>
+                </div>
+            ))}
+        </div>
+        <div>Total: {total()}</div>
+        <button>Check Out</button>
         </>
     )
 }

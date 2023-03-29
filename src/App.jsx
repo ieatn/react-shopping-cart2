@@ -14,12 +14,19 @@ function App() {
 
   const [page, setPage] = useState('products')
 
+  const [open, setOpen] = useState(false)
+
+
   return (
     <>
       <button onClick={() => setPage('products')}>products</button>
-      <button onClick={() => setPage('cart')}>cart ({cartLength()})</button>
+      <button onClick={() => setOpen(!open)}>cart ({cartLength()})</button>
+      <div className={`sidebar ${open ? 'open' : ''}`}>
+        <h1>Cart</h1>
+        <button onClick={() => setOpen(!open)} className='sidebar-close'>X</button>
+        <Cart />
+      </div>
       {page === 'products' && <Products />}
-      {page === 'cart' && <Cart />}
     </>
   )
 }

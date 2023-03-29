@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     text-align: center;
 }
@@ -10,4 +15,26 @@ img {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: auto;
+}
+.sidebar {
+    width: 40%;
+    height: 100%;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid black;
+}
+.sidebar.open {
+    right: 0;
+
+}
+.sidebar-close {
+    border: none;
+    background: none;
+    position: absolute;
+    font-size: 2rem;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
 }
