@@ -8,9 +8,11 @@ export default function Cart() {
     const remove = (e) => {
         setCart(cart.filter(i => i !== e))
     }
+
     const total = () => {
         return Math.ceil(cart.reduce((total, i) => total + (i.price*i.quantity), 0)*100)/100
     }   
+    
     const clear = () => {
         setCart([])
     }
@@ -39,7 +41,6 @@ export default function Cart() {
             ))}
         </div>
         <div>Total: {total()}</div>
-        <button>Check Out</button>
         </>
     )
 }
